@@ -32,17 +32,31 @@ export default function Register() {
         const email = form.email.value
         const name = form.name.value
         const photo = form.photo.value
-        const pass = form.password.value
-        console.log({ email, pass, name, photo })
+        const password = form.password.value
+        
+        if (password > 6) {
+          toast.error("Password length must be at least 6 character");
+          return;
+        }
+        if (!/[A-Z]/.test(password)) {
+          toast.error("Must have an Uppercase letter in the password!");
+          return;
+        }
+        if (!/[a-z]/.test(password)) {
+          toast.error("Must have an Lowercase letter in the password!");
+          return;
+        }
+        console.log({ email, password, name, photo })
         try {
+          
           //2. User Registration
-          const result = await createUser(email, pass)
+          const result = await createUser(email, password)
           console.log(result)
           await updateUserProfile(name, photo)
           setUser({ ...result.user, photoURL: photo, displayName: name })
           toast.success('Signup Successful')
           navigate('/')
-          e.target('')
+          form.reset("")
         } catch (err) {
           console.log(err)
           toast.error(err?.message)
@@ -78,6 +92,7 @@ export default function Register() {
               <input
                 type="text"
                 name='name'
+                required
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
                          focus:ring-indigo-500 focus:border-transparent transition-colors"
                 placeholder="John Doe"
@@ -93,6 +108,7 @@ export default function Register() {
               <input
                 type="email"
                 name='email'
+                required
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
                          focus:ring-indigo-500 focus:border-transparent transition-colors"
                 placeholder="example@email.com"
@@ -108,6 +124,7 @@ export default function Register() {
               <input
                 type="password"
                 name='password'
+                required
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
                          focus:ring-indigo-500 focus:border-transparent transition-colors"
                 placeholder="Enter your password"
@@ -123,6 +140,7 @@ export default function Register() {
               <input
               name='photo'
                 type="url"
+                required
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
                          focus:ring-indigo-500 focus:border-transparent transition-colors"
                 placeholder="Enter photo URL"

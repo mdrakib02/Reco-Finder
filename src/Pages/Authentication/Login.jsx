@@ -5,9 +5,11 @@ import { Mail, Lock, ArrowRight,  } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const { signIn, signInWithGoogle } = useContext(AuthContext)
+  const navigate = useNavigate()
     const loginAnimation = {
         "v": "5.7.1",
         "fr": 29.9700012207031,
@@ -35,6 +37,26 @@ export default function Login() {
         }
       }
 
+      // SignIn 
+      const handleSignIn = async e => {
+        e.preventDefault()
+        const form = e.target
+        const email = form.email.value
+        const pass = form.password.value
+        console.log({ email, pass })
+        try {
+          //User Login
+          await signIn(email, pass)
+          toast.success('Signin Successful')
+          // navigate(from, { replace: true })
+           form.reset("")
+           navigate("/")
+        } catch (err) {
+          console.log(err)
+          toast.error(err?.message)
+        }
+      }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row items-center justify-center p-4">
       {/* Left side - Login Form */}
@@ -54,13 +76,14 @@ export default function Login() {
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Welcome Back!</h2>
 
         {/* Login Form */}
-        <div className="space-y-6">
+        <form onSubmit={handleSignIn} className="space-y-6">
           <div className="relative">
             <label className="text-sm font-medium text-gray-700 mb-1 block">Email</label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="email"
+                name='email'
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 placeholder="Enter your email"
               />
@@ -73,13 +96,14 @@ export default function Login() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="password"
+                name='password'
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 placeholder="Enter your password"
               />
             </div>
           </div>
 
-          <motion.button
+          <motion.button 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 
@@ -115,7 +139,7 @@ export default function Login() {
               Sign up
             </a>
           </p>
-        </div>
+        </form>
       </motion.div>
 
       {/* Right side - Animation */}
