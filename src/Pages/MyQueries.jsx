@@ -83,6 +83,7 @@ export default function MyQueries() {
               <p className="text-sm text-gray-500 mb-4">{query.detail}</p>
               
               <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+                <Link to={`/query-details/${query._id}`}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -90,7 +91,7 @@ export default function MyQueries() {
                 >
                   <Eye className="w-4 h-4 mr-1" />
                   View
-                </motion.button>
+                </motion.button></Link>
                <Link to={`/update/${query._id}`}>
                <motion.button
                   whileHover={{ scale: 1.05 }}

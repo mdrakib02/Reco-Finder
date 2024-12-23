@@ -8,6 +8,7 @@ import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
 import Queries from "../Pages/Queries";
 import UpdateQueries from "../Pages/UpdateQueries";
+import QueryDetails from "../Pages/QueryDetails";
 
 export const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
         {
           path: "/update/:id",
           element: <UpdateQueries></UpdateQueries>
+        },
+        {
+          path: "query-details/:id",
+          element: <QueryDetails></QueryDetails>
         }
       ]
     },
