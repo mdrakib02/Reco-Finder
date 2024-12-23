@@ -6,6 +6,8 @@ import ErrorPage from "../Pages/Error/ErrorPage";
 import MyQueries from "../Pages/MyQueries";
 import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
+import Queries from "../Pages/Queries";
+import UpdateQueries from "../Pages/UpdateQueries";
 
 export const router = createBrowserRouter([
     {
@@ -32,6 +34,14 @@ export const router = createBrowserRouter([
         {
           path: "/register",
           element: <Register></Register>
+        },
+        {
+          path: "/queries",
+          element: <Queries></Queries>
+        },
+        {
+          path: "/update/:id",
+          element: <UpdateQueries></UpdateQueries>
         }
       ]
     },
