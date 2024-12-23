@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import { Mail, Lock, ArrowRight,  } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
+import { AuthContext } from '../../Provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 export default function Login() {
+  const { signIn, signInWithGoogle } = useContext(AuthContext)
     const loginAnimation = {
         "v": "5.7.1",
         "fr": 29.9700012207031,
@@ -18,6 +21,20 @@ export default function Login() {
         "assets": [],
         "layers": []
       };
+
+      // Google Login
+      const handleGoogleSignIn = async () => {
+        try {
+          await signInWithGoogle()
+    
+          toast.success('Signin Successful')
+          
+        } catch (err) {
+          console.log(err)
+          toast.error(err?.message)
+        }
+      }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row items-center justify-center p-4">
       {/* Left side - Login Form */}
@@ -82,6 +99,7 @@ export default function Login() {
           </div>
 
           <motion.button
+          onClick={handleGoogleSignIn}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="w-full border border-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-50 
