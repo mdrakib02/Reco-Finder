@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import { User, Mail, Lock, Link, ArrowRight } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../Provider/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-
+  const navigate = useNavigate()
+  const { createUser, updateUserProfile, setUser } =
+    useContext(AuthContext)
     const registrationAnimation = {
         "v": "5.7.1",
         "fr": 29.9700012207031,
@@ -17,6 +22,32 @@ export default function Register() {
         "assets": [],
         "layers": []
       };
+
+
+
+      // SignUp 
+      const handleSignUp = async e => {
+        e.preventDefault()
+        const form = e.target
+        const email = form.email.value
+        const name = form.name.value
+        const photo = form.photo.value
+        const pass = form.password.value
+        console.log({ email, pass, name, photo })
+        try {
+          //2. User Registration
+          const result = await createUser(email, pass)
+          console.log(result)
+          await updateUserProfile(name, photo)
+          setUser({ ...result.user, photoURL: photo, displayName: name })
+          toast.success('Signup Successful')
+          navigate('/')
+          e.target('')
+        } catch (err) {
+          console.log(err)
+          toast.error(err?.message)
+        }
+      }
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row items-center justify-center p-4">
       {/* Left side - Registration Form */}
@@ -37,7 +68,8 @@ export default function Register() {
         <p className="text-center text-gray-600 mb-8">Join our community today!</p>
 
         {/* Registration Form */}
-        <div className="space-y-6">
+
+        <form onSubmit={handleSignUp} className="space-y-6">
           {/* Name Input */}
           <div className="relative">
             <label className="text-sm font-medium text-gray-700 mb-1 block">Full Name</label>
@@ -45,6 +77,7 @@ export default function Register() {
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="text"
+                name='name'
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
                          focus:ring-indigo-500 focus:border-transparent transition-colors"
                 placeholder="John Doe"
@@ -59,6 +92,7 @@ export default function Register() {
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="email"
+                name='email'
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
                          focus:ring-indigo-500 focus:border-transparent transition-colors"
                 placeholder="example@email.com"
@@ -73,6 +107,7 @@ export default function Register() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="password"
+                name='password'
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
                          focus:ring-indigo-500 focus:border-transparent transition-colors"
                 placeholder="Enter your password"
@@ -86,6 +121,7 @@ export default function Register() {
             <div className="relative">
               <Link className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
+              name='photo'
                 type="url"
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
                          focus:ring-indigo-500 focus:border-transparent transition-colors"
@@ -111,7 +147,7 @@ export default function Register() {
               Sign in
             </a>
           </p>
-        </div>
+        </form>
       </motion.div>
 
       {/* Right side - Animation */}

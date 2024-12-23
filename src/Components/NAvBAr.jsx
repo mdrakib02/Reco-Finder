@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 import { Menu, X, Search, LogIn, LogOut, User, UserPlus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from "../Provider/AuthProvider";
-import { img } from "framer-motion/client";
+import { button, div, img } from "framer-motion/client";
+import toast from "react-hot-toast";
 
 // Individual NavLink component
 const StyledNavLink = ({ to, children, className }) => (
@@ -48,7 +49,7 @@ const MobileNavLink = ({ to, children }) => (
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const menuVariants = {
     closed: {
       opacity: 0,
@@ -65,7 +66,18 @@ export default function NavBar() {
       },
     },
   };
+const handleLogOut =async()=>{
+  
+  try {
+    await logOut()
 
+    toast.success('Logout Successful')
+    
+  } catch (err) {
+    console.log(err)
+    toast.error(err?.message)
+  }
+}
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -76,7 +88,7 @@ export default function NavBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <StyledNavLink to="/">
+          <StyledNavLink  to="/">
             <motion.div
               className="flex-shrink-0 flex items-center"
               whileHover={{ scale: 1.05 }}
@@ -113,9 +125,12 @@ export default function NavBar() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="flex items-center space-x-2 focus:outline-none"
             >
-              <div data-tip={user?.displayNAme} className="h-8 tooltip tooltip-bottom w-8 rounded-full bg-indigo-100 flex items-center justify-center hover:bg-indigo-200">
+              <div
+                data-tip={user?.displayNAme}
+                className="h-8 tooltip tooltip-bottom w-8 rounded-full bg-indigo-100 flex items-center justify-center hover:bg-indigo-200"
+              >
                 {user ? (
-                  <img src={user?.photoURL} alt="" className="rounded-2xl"/>
+                  <img src={user?.photoURL} alt="" className="rounded-2xl" />
                 ) : (
                   <User className="h-5 w-5 text-indigo-600" />
                 )}
@@ -131,54 +146,61 @@ export default function NavBar() {
                   variants={menuVariants}
                   className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50"
                 >
-                  <StyledNavLink to="/login" className="block w-full">
-                    <motion.div
-                      variants={{
-                        closed: { opacity: 0, x: -10 },
-                        open: { opacity: 1, x: 0 },
-                      }}
-                      whileHover={{
-                        backgroundColor: "#EEF2FF",
-                        color: "#4F46E5",
-                      }}
-                      className="px-4 py-2 text-left text-gray-600 flex items-center"
-                    >
-                      <LogIn className="h-5 w-5 mr-2" />
-                      <span>Login</span>
-                    </motion.div>
-                  </StyledNavLink>
-                  <StyledNavLink to="/register" className="block w-full">
-                    <motion.div
-                      variants={{
-                        closed: { opacity: 0, x: -10 },
-                        open: { opacity: 1, x: 0 },
-                      }}
-                      whileHover={{
-                        backgroundColor: "#EEF2FF",
-                        color: "#4F46E5",
-                      }}
-                      className="px-4 py-2 text-left text-gray-600 flex items-center"
-                    >
-                      <UserPlus className="h-5 w-5 mr-2" />
-                      <span>Sign Up</span>
-                    </motion.div>
-                  </StyledNavLink>
-                  <StyledNavLink to="/logout" className="block w-full">
-                    <motion.div
-                      variants={{
-                        closed: { opacity: 0, x: -10 },
-                        open: { opacity: 1, x: 0 },
-                      }}
-                      whileHover={{
-                        backgroundColor: "#EEF2FF",
-                        color: "#4F46E5",
-                      }}
-                      className="px-4 py-2 text-left text-gray-600 flex items-center"
-                    >
-                      <LogOut className="h-5 w-5 mr-2" />
-                      <span>Log Out</span>
-                    </motion.div>
-                  </StyledNavLink>
+                  {user ? (
+                    <button onClick={handleLogOut}>
+                      <StyledNavLink  to="/" className="block w-full">
+                        <motion.div
+                          variants={{
+                            closed: { opacity: 0, x: -10 },
+                            open: { opacity: 1, x: 0 },
+                          }}
+                          whileHover={{
+                            backgroundColor: "#EEF2FF",
+                            color: "#4F46E5",
+                          }}
+                          className="px-4 py-2 text-left text-gray-600 flex items-center"
+                        >
+                          <LogOut className="h-5 w-5 mr-2" />
+                          <span>Log Out</span>
+                        </motion.div>
+                      </StyledNavLink>
+                    </button>
+                  ) : (
+                    <div>
+                      <StyledNavLink to="/login" className="block w-full">
+                        <motion.div
+                          variants={{
+                            closed: { opacity: 0, x: -10 },
+                            open: { opacity: 1, x: 0 },
+                          }}
+                          whileHover={{
+                            backgroundColor: "#EEF2FF",
+                            color: "#4F46E5",
+                          }}
+                          className="px-4 py-2 text-left text-gray-600 flex items-center"
+                        >
+                          <LogIn className="h-5 w-5 mr-2" />
+                          <span>Login</span>
+                        </motion.div>
+                      </StyledNavLink>
+                      <StyledNavLink to="/register" className="block w-full">
+                        <motion.div
+                          variants={{
+                            closed: { opacity: 0, x: -10 },
+                            open: { opacity: 1, x: 0 },
+                          }}
+                          whileHover={{
+                            backgroundColor: "#EEF2FF",
+                            color: "#4F46E5",
+                          }}
+                          className="px-4 py-2 text-left text-gray-600 flex items-center"
+                        >
+                          <UserPlus className="h-5 w-5 mr-2" />
+                          <span>Sign Up</span>
+                        </motion.div>
+                      </StyledNavLink>
+                    </div>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -219,24 +241,6 @@ export default function NavBar() {
               </MobileNavLink>
 
               {/* Mobile Auth Links */}
-              <MobileNavLink to="/login">
-                <div className="flex items-center">
-                  <LogIn className="h-5 w-5 mr-2" />
-                  <span>Login</span>
-                </div>
-              </MobileNavLink>
-              <MobileNavLink to="/register">
-                <div className="flex items-center">
-                  <UserPlus className="h-5 w-5 mr-2" />
-                  <span>Sign Up</span>
-                </div>
-              </MobileNavLink>
-              <MobileNavLink to="/logout">
-                <div className="flex items-center">
-                  <LogOut className="h-5 w-5 mr-2" />
-                  <span>Log Out</span>
-                </div>
-              </MobileNavLink>
             </div>
           </motion.div>
         )}
