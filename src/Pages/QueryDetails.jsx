@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import { motion } from "framer-motion";
-import { Upload, User, Package, Mail, Building } from "lucide-react";
+import { Upload, User, Package, Mail, Building, Edit, Trash2 } from "lucide-react";
 import { h1 } from "framer-motion/client";
 import toast from "react-hot-toast";
 
@@ -155,50 +155,60 @@ export default function QueryDetails() {
                 </div>
               </div>
               {/* Recomandations Sections */}
-              <div className="">
-                <h2 className="text-2xl font-bold mb-6">All Recommendations</h2>
-
-                <div className="space-y-6">
-                  {recomantaions.map((rec) => (
-                    <div key={rec._id} className="card bg-base-100 shadow-lg">
-                      <div className="card-body">
-                        {/* User Info & Date */}
-                        <div className="flex items-center gap-4 mb-4">
-                          <div className="avatar">
-                            <div className="w-10 h-10 rounded-full">
-                              <img src={rec.Recommender?.photo} alt={rec.userName} />
-                            </div>
-                          </div>
-                          <div>
-                            <h3 className="font-semibold">{rec.userName}</h3>
-                            <time className="text-sm text-gray-500">
-                              {new Date(
-                                rec.currentDate
-                              ).toLocaleDateString()}
-                            </time>
-                          </div>
-                        </div>
-
-                        {/* Recommendation Text */}
-                        <p className="text-gray-700 mb-4">
-                          {rec.recomandateText}
-                        </p>
-
-                        {/* Recommendation Image */}
-                        {rec.recommendationImage && (
-                          <div className="rounded-lg overflow-hidden">
-                            <img
-                              src={rec.RecomandationImgUrl}
-                              alt="Recommendation"
-                              className="w-full h-auto object-cover"
-                            />
-                          </div>
-                        )}
-                      </div>
+              <div className="container mx-auto p-4">
+      <div className="space-y-4">
+        {recomantaions.map((rec) => (
+          <div key={rec._id} className="bg-white rounded-lg shadow p-4">
+            <div className="flex gap-3">
+              {/* User Avatar */}
+              <div className="flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-gray-100 overflow-hidden">
+                  {rec.Recommender?.photo ? (
+                    <img
+                      src={rec.Recommender?.photo}
+                      alt=""
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.parentNode.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-500"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>';
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                      <User className="w-6 h-6 text-gray-500" />
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
+
+              {/* Content */}
+              <div className="flex-grow">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="font-medium text-gray-900">{rec.Recommender?.name}</h3>
+                    <time className="text-sm text-gray-500">
+                    {new Date(rec.currentDate).toLocaleDateString()}
+                  </time>
+                  </div>
+                  
+                  {/* Action Buttons */}
+                  <div className="flex gap-2">
+                    <button className="p-1 hover:bg-gray-100 rounded-full transition-colors">
+                      <Edit className="w-4 h-4 text-gray-500" />
+                    </button>
+                    <button className="p-1 hover:bg-gray-100 rounded-full transition-colors">
+                      <Trash2 className="w-4 h-4 text-gray-500" />
+                    </button>
+                  </div>
+                </div>
+                <h4 className="text-sm font-bold text-gray-500">{rec.recomandationTitle}</h4>
+                <p className="mt-1 text-gray-600">{rec.recomandateText}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
             </div>
           </div>
         </motion.div>

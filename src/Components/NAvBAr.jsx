@@ -130,7 +130,7 @@ const handleLogOut =async()=>{
                 className="h-8 tooltip tooltip-bottom w-8 rounded-full bg-indigo-100 flex items-center justify-center hover:bg-indigo-200"
               >
                 {user ? (
-                  <img src={user?.photoURL} alt="" className="rounded-2xl" />
+                  <img referrerPolicy="no-referrer" src={user?.photoURL} alt="" className="rounded-2xl" />
                 ) : (
                   <User className="h-5 w-5 text-indigo-600" />
                 )}
