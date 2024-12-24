@@ -91,7 +91,7 @@ export default function QueryDetails() {
 
   const fetchAllJobs = async () => {
     const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/recomantaions`
+      `${import.meta.env.VITE_API_URL}/recomantaions/${id}`
     );
     setRecomantaions(data);
   };
