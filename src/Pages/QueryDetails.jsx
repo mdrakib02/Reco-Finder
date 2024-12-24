@@ -13,7 +13,8 @@ export default function QueryDetails() {
   console.log(id);
   const [product, setProduct] = useState({});
   console.log(product);
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(new Date());
+  const [recomantaions, setRecomantaions] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,13 +29,8 @@ export default function QueryDetails() {
     };
     fetchData();
   }, [id]);
-  // const [formData, setFormData] = useState({
-  //   title: "",
-  //   productName: "",
-  //   productImage: "",
-  //   reason: "",
-  // });
-  const handleSubmit = async(e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.target;
@@ -54,21 +50,22 @@ export default function QueryDetails() {
       RecomandationProductName,
       RecomandationImgUrl,
       recomandateText,
-      queryData:{
+      queryData: {
         queryId: product?._id,
         queryTitle: product?.title,
         productName: product?.name,
       },
-      queryCreator:{
+      queryCreator: {
         email: product?.buyer?.email,
         name: product?.buyer?.name,
       },
-      Recommender:{
+      Recommender: {
         email: user?.email,
         name: user?.displayName,
+        photo: user?.photoURL,
       },
       currentDate: startDate,
-    }
+    };
 
     try {
       // Send data to backend
@@ -76,7 +73,7 @@ export default function QueryDetails() {
         `${import.meta.env.VITE_API_URL}/add-recomandation`,
         recomandationData
       );
-  
+
       // Success message
       toast.success("Data Added Successfully!!!");
     } catch (err) {
@@ -84,9 +81,21 @@ export default function QueryDetails() {
       console.error(err.message);
       toast.error(err.response?.data || "Failed to add recommendation!");
     }
-
-
   };
+
+  // Get Recomandation
+  console.log(recomantaions);
+  useEffect(() => {
+    fetchAllJobs();
+  }, []);
+
+  const fetchAllJobs = async () => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_URL}/recomantaions`
+    );
+    setRecomantaions(data);
+  };
+
   return (
     <div className="container mx-auto p-4">
       <div className="flex flex-col lg:flex-row gap-6">
@@ -143,6 +152,51 @@ export default function QueryDetails() {
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+              {/* Recomandations Sections */}
+              <div className="">
+                <h2 className="text-2xl font-bold mb-6">All Recommendations</h2>
+
+                <div className="space-y-6">
+                  {recomantaions.map((rec) => (
+                    <div key={rec._id} className="card bg-base-100 shadow-lg">
+                      <div className="card-body">
+                        {/* User Info & Date */}
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className="avatar">
+                            <div className="w-10 h-10 rounded-full">
+                              <img src={rec.Recommender?.photo} alt={rec.userName} />
+                            </div>
+                          </div>
+                          <div>
+                            <h3 className="font-semibold">{rec.userName}</h3>
+                            <time className="text-sm text-gray-500">
+                              {new Date(
+                                rec.currentDate
+                              ).toLocaleDateString()}
+                            </time>
+                          </div>
+                        </div>
+
+                        {/* Recommendation Text */}
+                        <p className="text-gray-700 mb-4">
+                          {rec.recomandateText}
+                        </p>
+
+                        {/* Recommendation Image */}
+                        {rec.recommendationImage && (
+                          <div className="rounded-lg overflow-hidden">
+                            <img
+                              src={rec.RecomandationImgUrl}
+                              alt="Recommendation"
+                              className="w-full h-auto object-cover"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
