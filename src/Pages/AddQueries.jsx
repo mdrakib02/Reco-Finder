@@ -17,8 +17,8 @@ export default function AddQueries() {
     const brand = form.brand.value;
     const img = form.img.value;
     const title = form.title.value;
-    const detail = form.detail.value;
-    console.log(name, brand, img, title, detail);
+    const boycokDetail = form.boycokDetail.value;
+    console.log(name, brand, img, title, boycokDetail);
 
     const addFormData = {
       name,
@@ -30,7 +30,7 @@ export default function AddQueries() {
         name: user?.displayName,
         photo: user?.photoURL,
       },
-      detail,
+      boycokDetail,
       deadline: startDate,
       recommendationCount: 0,
     };
@@ -120,7 +120,7 @@ export default function AddQueries() {
           />
         </div>
 
-        {/* Boucoting details */}
+        {/* Boycoting details */}
         <div>
           <label
             htmlFor="boycottReason"
@@ -130,7 +130,7 @@ export default function AddQueries() {
           </label>
           <textarea
             id="boycottReason"
-            name="detail"
+            name="boycokDetail"
             rows={4}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="Enter the reason you don't want this product"

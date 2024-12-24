@@ -1,43 +1,67 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { key } from "localforage";
+import { Link } from "react-router-dom";
 
 export default function Queries() {
-    const [products, setProducts] = useState([]);
-    console.log(products)
-    useEffect(()=>{
-      fetchAllJobs();
-    },[])
-     
-    const fetchAllJobs = async()=>{
-      const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products`)
-      setProducts(data)
-    };
+  const [products, setProducts] = useState([]);
+  console.log(products);
+  useEffect(() => {
+    fetchAllJobs();
+  }, []);
+
+  const fetchAllJobs = async () => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_URL}/products`
+    );
+    setProducts(data);
+  };
+
+  const sortedQueries = [...products].sort(
+    (a, b) => b.recommendationCount - a.recommendationCount
+  );
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
-        {
-            products.map(product=>  <div className="card w-40 md:w-56 bg-base-100 shadow-xl mx-auto ">
-                <figure className="px-4 pt-4">
-                  <img
-                    src={product?.img}
-                    alt="Product"
-                    className="rounded-xl object-cover h-full w-28 md:w-32"
-                  />
-                </figure>
-                <div className="card-body">
-                  <span className="text-sm opacity-70">Brand: {product?.brand}</span>
-                  <h2 className="text-sm font-bold md:text-xl">{product?.title}</h2>
-                  <div className="card-actions mt-2">
-                    <button className="btn btn-primary btn-xs md:btn-sm">View Details</button>
-                  </div>
-                </div>
-              </div>)
-        }
-      
+      {sortedQueries.map((query) => (
+        <div
+          key={query._id}
+          className="bg-white rounded-lg shadow-lg overflow-hidden"
+        >
+          {/* Image Container */}
+          <div className="h-48 overflow-hidden">
+            <img
+              src={query.img}
+              alt={query.title}
+              className="w-full h-full object-cover transition-transform hover:scale-105"
+            />
+          </div>
+
+          {/* Content Container */}
+          <div className="p-4">
+            {/* Recommendation Count */}
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-sm font-medium text-gray-600">
+                {query.recommendationCount} recommendations
+              </span>
+            </div>
+
+            {/* Title */}
+            <h3 className="text-lg font-semibold mb-4 text-gray-800">
+              {query.title}
+            </h3>
+
+            {/* Button */}
+            <Link to={`/query-details/${query._id}`}>
+              <button className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 transition-colors text-sm font-medium">
+                Recommend
+              </button>
+            </Link>
+          </div>
+        </div>
+      ))}{" "}
     </div>
   );
 }
-
 
 // {
 //     "_id": "676952cb7fa02ff169830446",
