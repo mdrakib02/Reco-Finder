@@ -27,7 +27,7 @@ export default function MyQueries() {
       const handleDelete = async(id) => {
         console.log(id, "deleted id");
         try {
-           await axios.delete(`${import.meta.env.VITE_API_URL}/product/${id}`)
+           await axios.delete(`${import.meta.env.VITE_API_URL}/recomandation/${id}`)
           toast.success('Data delete successfully!!!');
           fetchAllJobs()
         } catch (err) {

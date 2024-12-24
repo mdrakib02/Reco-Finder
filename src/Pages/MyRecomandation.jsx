@@ -51,7 +51,7 @@ export default function MyRecomandation() {
       };
       
   return (
-    <div className="container mx-auto p-4">
+    <div className="max-w-7xl mx-auto p-4">
       <div className="overflow-x-auto">
         <table className="table w-full">
           {/* Rest of your table code stays exactly the same */}

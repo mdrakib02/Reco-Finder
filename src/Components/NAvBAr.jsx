@@ -85,7 +85,7 @@ const handleLogOut =async()=>{
       transition={{ duration: 0.5 }}
       className="sticky top-0 z-50 bg-white shadow-md"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <StyledNavLink  to="/">
@@ -107,7 +107,7 @@ const handleLogOut =async()=>{
           <div className="hidden md:flex items-center space-x-8">
             <StyledNavLink to="/">Home</StyledNavLink>
             <StyledNavLink to="/queries">Queries</StyledNavLink>
-            <StyledNavLink to="/recommendations">
+            <StyledNavLink to="/recommendationsfor-me">
               Recommendations For Me
             </StyledNavLink>
             <StyledNavLink to="/my-queries">My Queries</StyledNavLink>
@@ -231,7 +231,7 @@ const handleLogOut =async()=>{
             <div className="px-2 pt-2 pb-3 space-y-1">
               <MobileNavLink to="/">Home</MobileNavLink>
               <MobileNavLink to="/queries">Queries</MobileNavLink>
-              <MobileNavLink to="/recommendations">
+              <MobileNavLink to="/recommendationsfor-me">
                 Recommendations For Me
               </MobileNavLink>
               <MobileNavLink to="/my-queries">My Queries</MobileNavLink>
