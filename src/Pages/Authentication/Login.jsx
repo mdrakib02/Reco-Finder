@@ -5,11 +5,13 @@ import { Mail, Lock, ArrowRight,  } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const { signIn, signInWithGoogle } = useContext(AuthContext)
   const navigate = useNavigate()
+   const location = useLocation()
+  const form = location?.state || '/'
     const loginAnimation = {
         "v": "5.7.1",
         "fr": 29.9700012207031,
@@ -28,7 +30,7 @@ export default function Login() {
       const handleGoogleSignIn = async () => {
         try {
           await signInWithGoogle()
-    
+          navigate(form, { replace: true })
           toast.success('Signin Successful')
           
         } catch (err) {
@@ -48,7 +50,7 @@ export default function Login() {
           //User Login
           await signIn(email, pass)
           toast.success('Signin Successful')
-          // navigate(from, { replace: true })
+          navigate(from, { replace: true })
            form.reset("")
            navigate("/")
         } catch (err) {
