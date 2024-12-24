@@ -63,18 +63,3 @@ export default function Queries() {
   );
 }
 
-// {
-//     "_id": "676952cb7fa02ff169830446",
-//     "name": "Watch",
-//     "brand": "Samgsang",
-//     "img": "https://i.ibb.co.com/HGL0Jgy/pngwing-com-23.png",
-//     "title": "Mobile Watch",
-//     "buyer": {
-//         "email": "mdrakibahmed514@gmail.com",
-//         "name": "Md Rakib",
-//         "photo": "https://lh3.googleusercontent.com/a/ACg8ocI2Uv-ubYkIaMNCFwuYq0-_76qO2RUBvYwAkIVlHakHpY7Db51E=s96-c"
-//     },
-//     "detail": "Mobile watches, also known as smartwatches, are wearable devices that offer functionalities beyond timekeeping. These devices integrate features similar to ...",
-//     "deadline": "2024-12-23T11:56:36.174Z",
-//     "recommendationCount": 0
-// }

@@ -9,6 +9,7 @@ import Register from "../Pages/Authentication/Register";
 import Queries from "../Pages/Queries";
 import UpdateQueries from "../Pages/UpdateQueries";
 import QueryDetails from "../Pages/QueryDetails";
+import MyRecomandation from "../Pages/MyRecomandation";
 
 export const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
         {
           path: "query-details/:id",
           element: <QueryDetails></QueryDetails>
+        },
+        {
+          path: "/my-recomandation",
+          element: <MyRecomandation></MyRecomandation>
         }
       ]
     },

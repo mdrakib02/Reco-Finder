@@ -112,7 +112,7 @@ const handleLogOut =async()=>{
             </StyledNavLink>
             <StyledNavLink to="/my-queries">My Queries</StyledNavLink>
             <StyledNavLink to="/add-queries">Add Queries</StyledNavLink>
-            <StyledNavLink to="/my-recommendations">
+            <StyledNavLink to="/my-recomandation">
               My Recommendations
             </StyledNavLink>
           </div>
@@ -236,7 +236,7 @@ const handleLogOut =async()=>{
               </MobileNavLink>
               <MobileNavLink to="/my-queries">My Queries</MobileNavLink>
               <MobileNavLink to="/add-queries">Add Queries</MobileNavLink>
-              <MobileNavLink to="/my-recommendations">
+              <MobileNavLink to="/my-recomandation">
                 My Recommendations
               </MobileNavLink>
 
