@@ -133,6 +133,7 @@ export default function AddQueries() {
             <option value="cloth">Cloth</option>
             <option value="cosmetics">Cosmetics</option>
             <option value="digital-product">Digital Product</option>
+            <option value="sports">Sports Product</option>
           </select>
         </div>
 

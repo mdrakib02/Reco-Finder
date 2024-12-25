@@ -74,10 +74,11 @@ export default function Queries() {
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="all">All Categories</option>
-          <option value="electronics">Electronics</option>
+          <option value="electronics ">Electronics</option>
           <option value="cloth">Clothing</option>
           <option value="cosmetics">Cosmetics</option>
           <option value="digital-product">Digital Products</option>
+          <option value="sports">Sports Products</option>
          
         </select>
       </div>
@@ -90,7 +91,7 @@ export default function Queries() {
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
           {/* img  */}
-            <div className="h-48 overflow-hidden">
+            <div className="max-w-64 max-h-48 min-h-36 min-w-28 overflow-hidden">
               <img
                 src={query.img}
                 alt={query.title}
