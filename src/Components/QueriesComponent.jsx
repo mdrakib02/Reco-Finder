@@ -11,12 +11,13 @@ export default function QueriesComponent() {
      
     const fetchAllJobs = async()=>{
       const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products`)
+      console.log(data)
       setProducts(data)
     };
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
     {
-        products.slice(0, 6).map(product=>  <div className="card w-40 md:w-56 bg-base-100 shadow-xl mx-auto ">
+        products?.slice(0, 6).map(product=>  <div className="card w-40 md:w-56 bg-base-100 shadow-xl mx-auto ">
             <figure className="px-4 pt-4">
               <img
                 src={product?.img}
