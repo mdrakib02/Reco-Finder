@@ -17,6 +17,7 @@ export default function AddQueries() {
     const brand = form.brand.value;
     const img = form.img.value;
     const title = form.title.value;
+    const category = form.category.value;
     const boycokDetail = form.boycokDetail.value;
     console.log(name, brand, img, title, boycokDetail);
 
@@ -25,6 +26,7 @@ export default function AddQueries() {
       brand,
       img,
       title,
+      category,
       buyer: {
         email: user?.email,
         name: user?.displayName,
@@ -118,6 +120,20 @@ export default function AddQueries() {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="Ex: Is there any better product that gives me the same quality?"
           />
+        </div>
+        <div className="flex flex-col gap-4">
+          <label htmlFor="category" className="font-medium text-lg">Select a Category:</label>
+          <select
+          name="category"
+            id="category"
+            className="border rounded-md px-4 py-2 text-gray-700"
+          >
+            <option value="all">All</option>
+            <option value="electronics">Electrics</option>
+            <option value="cloth">Cloth</option>
+            <option value="cosmetics">Cosmetics</option>
+            <option value="digital-product">Digital Product</option>
+          </select>
         </div>
 
         {/* Boycoting details */}
