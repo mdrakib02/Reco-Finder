@@ -12,7 +12,7 @@ export default function RecomdationForME() {
 
   const fetchAllJobs = async () => {
     const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/my-recomandations/${user?.email}`
+      `${import.meta.env.VITE_API_URL}/me-recomandations/${user?.email}`
     );
     setMyRecomandation(data);
   };

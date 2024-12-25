@@ -1,55 +1,63 @@
-import { Trash2, User } from 'lucide-react';
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import toast from 'react-hot-toast';
+import { Trash2, User } from "lucide-react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { AuthContext } from "../Provider/AuthProvider";
 export default function MyRecomandation() {
+  const {user} = useContext(AuthContext)
+  const [recomandations, setRecomandations] = useState([]);
+  console.log(recomandations);
+  useEffect(() => {
+    fetchAllJobs();
+  }, []);
 
-    const [recomandations, setRecomandations] = useState([]);
-    console.log(recomandations)
-    useEffect(()=>{
-      fetchAllJobs();
-    },[])
-     
-    const fetchAllJobs = async()=>{
-      const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/recomantaions`)
-      setRecomandations(data)
-    };
-// Delete Functionality
-    const handleDelete = (id) => {
-        toast((t) => (
-          <div className="flex flex-col gap-4">
-            <p>Are you sure you want to delete?</p>
-            <div className="flex gap-2">
-              <button
-                onClick={async () => {
-                  try {
-                    await axios.delete(`${import.meta.env.VITE_API_URL}/recomandation/${id}`);
-                    toast.success("Recommendation deleted successfully!");
-                    fetchAllJobs();
-                  } catch (err) {
-                    console.log(err.message);
-                    toast.error(err.message);
-                  }
-                  toast.dismiss(t.id);
-                }}
-                className="bg-red-500 text-white px-3 py-2 rounded-md text-sm"
-              >
-                Delete
-              </button>
-              <button
-                onClick={() => toast.dismiss(t.id)}
-                className="bg-gray-200 px-3 py-2 rounded-md text-sm"
-              >
-                Cancel
-              </button>
-            </div>
+  const fetchAllJobs = async () => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_URL}/my-recomandations/${user?.email}`
+    );
+    setRecomandations(data);
+  };
+  // Delete Functionality
+  const handleDelete = (id) => {
+    toast(
+      (t) => (
+        <div className="flex flex-col gap-4">
+          <p>Are you sure you want to delete?</p>
+          <div className="flex gap-2">
+            <button
+              onClick={async () => {
+                try {
+                  await axios.delete(
+                    `${import.meta.env.VITE_API_URL}/recomandation/${id}`
+                  );
+                  toast.success("Recommendation deleted successfully!");
+                  fetchAllJobs();
+                } catch (err) {
+                  console.log(err.message);
+                  toast.error(err.message);
+                }
+                toast.dismiss(t.id);
+              }}
+              className="bg-red-500 text-white px-3 py-2 rounded-md text-sm"
+            >
+              Delete
+            </button>
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="bg-gray-200 px-3 py-2 rounded-md text-sm"
+            >
+              Cancel
+            </button>
           </div>
-        ), {
-          duration: 5000,  // Toast will stay for 5 seconds
-          position: 'top-center'
-        });
-      };
-      
+        </div>
+      ),
+      {
+        duration: 5000, // Toast will stay for 5 seconds
+        position: "top-center",
+      }
+    );
+  };
+
   return (
     <div className="max-w-7xl mx-auto p-4">
       <div className="overflow-x-auto">
@@ -71,13 +79,14 @@ export default function MyRecomandation() {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="w-12 h-12 rounded-full bg-gray-100">
-                        {rec.Recommender? (
+                        {rec.Recommender ? (
                           <img
                             src={rec.Recommender?.photo}
                             alt=""
                             onError={(e) => {
-                              e.target.style.display = 'none';
-                              e.target.parentNode.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-500"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>';
+                              e.target.style.display = "none";
+                              e.target.parentNode.innerHTML =
+                                '<div class="w-full h-full flex items-center justify-center bg-gray-200"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-500"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>';
                             }}
                           />
                         ) : (
@@ -94,7 +103,10 @@ export default function MyRecomandation() {
                 </td>
                 <td className="font-medium">{rec.recomandationTitle}</td>
                 <td className="max-w-md">
-                  <div className="line-clamp-2">{rec.recomandateText?.slice(0, 20)}{rec.recomandateText?.length > 20 && "..."}</div>
+                  <div className="line-clamp-2">
+                    {rec.recomandateText?.slice(0, 20)}
+                    {rec.recomandateText?.length > 20 && "..."}
+                  </div>
                 </td>
                 <td>{new Date(rec.currentDate).toLocaleDateString()}</td>
                 <td>
@@ -111,5 +123,5 @@ export default function MyRecomandation() {
         </table>
       </div>
     </div>
-  )
+  );
 }
