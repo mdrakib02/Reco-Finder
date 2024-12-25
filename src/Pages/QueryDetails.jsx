@@ -110,7 +110,7 @@ export default function QueryDetails() {
                 <div className="flex items-center gap-4">
                   <div className="avatar">
                     <div className="w-20 rounded-full ring ring-indigo-400 ring-offset-2">
-                      <img src={product?.buyer?.photo} alt="User" />
+                      <img referrerPolicy="no-referrer"  src={product?.buyer?.photo} alt="User" />
                     </div>
                   </div>
                   <div className="space-y-2">

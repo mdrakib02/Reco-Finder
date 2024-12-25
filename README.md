@@ -11,3 +11,5 @@ Currently, two official plugins are available:
 
 important note
 <!-- {new Date(rec.currentDate ).toLocaleDateString()} -->
+
+<!-- referrerPolicy="no-referrer"  -->
