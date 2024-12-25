@@ -19,10 +19,6 @@ export default function Queries() {
     setProducts(data);
   };
 
-  const sortedQueries = [...products].sort(
-    (a, b) => b.recommendationCount - a.recommendationCount
-  );
-
   // Get grid class based on selected layout
   const getGridClass = () => {
     switch(layout) {
@@ -39,8 +35,8 @@ export default function Queries() {
 
   // Products category filter
   const filteredQueries = category === 'all' 
-    ? sortedQueries 
-    : sortedQueries.filter(query => query.category === category);
+    ? products 
+    : products.filter(query => query.category === category);
   return (
 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-6 md:my-8 lg:my-12">
       {/* Control Panel */}
