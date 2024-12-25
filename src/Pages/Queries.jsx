@@ -23,13 +23,13 @@ export default function Queries() {
   const getGridClass = () => {
     switch(layout) {
       case 'grid-2':
-        return 'grid grid-cols-1 md:grid-cols-2 gap-5';
+        return 'grid grid-cols-1 md:grid-cols-1 gap-5';
       case 'grid-3':
-        return 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5';
+        return 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5';
       case 'grid-5':
-        return 'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5';
+        return 'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5';
       default:
-        return 'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5';
+        return 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5';
     }
   };
 

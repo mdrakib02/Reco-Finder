@@ -25,7 +25,7 @@ export default function FindFavoriteProducts() {
 
   return (
     <>
-    <form onSubmit={handleSearch} className="relative">
+    <form onSubmit={handleSearch} className="relative w-full max-w-4xl mx-auto p-4">
         <div className="flex flex-col sm:flex-row gap-2">
           <div className="relative flex-1">
             <input
@@ -53,7 +53,7 @@ export default function FindFavoriteProducts() {
           </button>
         </div>
       </form>
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 my-6 md:my-8 lg:my-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5 my-6 md:my-8 lg:my-12">
     {
         products.map(product=>  <div className="card w-40 md:w-56 bg-base-100 shadow-xl mx-auto ">
             <figure className="px-4 pt-4">
