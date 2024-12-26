@@ -1,7 +1,6 @@
 import React from 'react'
 import Slider from '../Components/HomeComponets/Slider'
 import FindFavoriteProducts from '../Components/FindFavoriteProducts'
-import Search from '../Components/Search'
 import TrendingProducts from '../Components/TrendingProducts'
 
 
