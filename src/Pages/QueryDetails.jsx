@@ -84,6 +84,7 @@ export default function QueryDetails() {
 
       // Success message
       toast.success("Data Added Successfully!!!");
+      form.reset("")
     } catch (err) {
       // Handle errors
       toast.error(err.response?.data || "Failed to add recommendation!");

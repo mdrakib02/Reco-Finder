@@ -38,6 +38,7 @@ const axiosSecure = useAxiosSecure()
           toast.error(err.message)
         }
       };
+     const decensingProduct = products.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
     
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-8">
@@ -49,7 +50,7 @@ const axiosSecure = useAxiosSecure()
       >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">My Queries : {products.length}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">My Queries : {decensingProduct.length}</h1>
             <p className="text-indigo-100">Track and manage all your product queries</p>
           </div>
         <Link to="/add-queries">
@@ -66,9 +67,9 @@ const axiosSecure = useAxiosSecure()
       </motion.div>
 
       {/* Queries Grid */}
-      {products.length > 0 ? (
+      {decensingProduct.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {products.map((query, index) => (
+          {decensingProduct.map((query, index) => (
             <motion.div
               key={query.id}
               initial={{ opacity: 0, y: 20 }}

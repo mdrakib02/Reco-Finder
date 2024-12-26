@@ -37,6 +37,8 @@ export default function Queries() {
   const filteredQueries = category === 'all' 
     ? products 
     : products.filter(query => query.category === category);
+
+    const decensingProduct = filteredQueries.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
   return (
 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-6 md:my-8 lg:my-12">
       {/* Control Panel */}
@@ -81,7 +83,7 @@ export default function Queries() {
 
       {/* Products grids*/}
       <div className={getGridClass()}>
-        {filteredQueries.map((query) => (
+        {decensingProduct.map((query) => (
           <div
             key={query._id}
             className="bg-white rounded-lg shadow-lg overflow-hidden"
@@ -100,6 +102,7 @@ export default function Queries() {
                 <span className="text-sm font-medium text-gray-600">
                   {query.recommendationCount} recommendations
                 </span>
+                <p>Date: {new Date(query.deadline).toLocaleDateString()}</p>
               </div>
               {/* Title */}
               <h3 className="text-lg font-semibold mb-4 text-gray-800">
