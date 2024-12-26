@@ -23,7 +23,7 @@ export default function FindFavoriteProducts() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
-      <div className="container mx-auto px-4 py-16">
+      <div className="max-w-7xl mx-auto px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -95,7 +95,7 @@ export default function FindFavoriteProducts() {
                   Brand: {product?.brand}
                 </span>
                 <h2 className="text-xl font-bold mt-2 text-gray-800">
-                  {product?.title}
+                  {product?.name}
                 </h2>
                 <div className="mt-6">
                   <Link to="/queries">

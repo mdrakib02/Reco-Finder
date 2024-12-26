@@ -23,7 +23,7 @@ export default function Slider() {
       title: "Discover Top Product Picks with Reco Finder",
       description:
         "Let ReCo Finder guide you to the best products that match your needs and style.",
-      image: "https://i.ibb.co.com/Njy3Npp/online-shop-7089820-1280.png",
+      image: "https://i.ibb.co.com/sC749mg/rb-5860.png",
       color: "bg-blue-500",
     },
   ];

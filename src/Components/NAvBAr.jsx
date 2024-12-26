@@ -11,7 +11,7 @@ const StyledNavLink = ({ to, children, onClick, className }) => (
     onClick={onClick}
     className={({ isActive }) => `
       text-gray-600 hover:text-indigo-600 transition-all duration-200
-      ${isActive ? "text-indigo-600 font-semibold" : ""}
+      ${isActive ? "text-indigo-600 font-semibold text-xl" : ""}
       ${className || ""}
     `}
   >
@@ -26,7 +26,7 @@ const MobileNavLink = ({ to, children, onClick }) => (
     to={to}
     onClick={onClick}
     className={({ isActive }) => `
-      block px-4 py-2 rounded-lg text-base font-medium transition-all duration-200
+      block px-4 py-2 rounded-lg text-base font-bold font-medium transition-all duration-200
       ${isActive ? "bg-indigo-50 text-indigo-600" : "hover:bg-gray-50"}
     `}
   >
@@ -127,7 +127,7 @@ export default function NavBar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="sticky top-0 z-50 bg-white shadow-lg"
+      className="sticky top-0 z-50 bg-violet-200 shadow-lg"
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">

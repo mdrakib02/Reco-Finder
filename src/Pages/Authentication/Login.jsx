@@ -34,6 +34,7 @@ export default function Login() {
             await signInWithGoogle();
             navigate(form, { replace: true });
             toast.success('Signin Successful');
+            
         } catch (err) {
             console.log(err);
             toast.error(err?.message);
@@ -52,7 +53,7 @@ export default function Login() {
           //User Login
           await signIn(email, pass)
           toast.success('Signin Successful')
-          navigate(from, { replace: true })
+          navigate(form, { replace: true })
            form.reset("")
            navigate("/")
         } catch (err) {
@@ -62,7 +63,7 @@ export default function Login() {
       }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row items-center justify-center p-4 py-6 md:py-8 lg:py-12">
       {/* Left side - Login Form */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
