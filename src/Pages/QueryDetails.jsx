@@ -1,18 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { motion } from "framer-motion";
-import { Upload, User, Package, Mail, Building, Edit, Trash2 } from "lucide-react";
+import {
+  Upload,
+  User,
+  Package,
+  Mail,
+  Building,
+  Edit,
+  Trash2,
+} from "lucide-react";
 import { h1 } from "framer-motion/client";
 import toast from "react-hot-toast";
 import AuthContext from "../Provider/AuthContext";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 export default function QueryDetails() {
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { user } = useContext(AuthContext);
-  console.log(id);
   const [product, setProduct] = useState({});
-  console.log(product);
   const [startDate, setStartDate] = useState(new Date());
   const [recomantaions, setRecomantaions] = useState([]);
 
@@ -69,8 +76,8 @@ export default function QueryDetails() {
 
     try {
       // Send data to backend
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/add-recomandation`,
+      const response = await axiosSecure.post(
+        `/add-recomandation`,
         recomandationData
       );
 
@@ -78,21 +85,18 @@ export default function QueryDetails() {
       toast.success("Data Added Successfully!!!");
     } catch (err) {
       // Handle errors
-      console.error(err.message);
       toast.error(err.response?.data || "Failed to add recommendation!");
     }
   };
 
   // Get Recomandation
-  console.log(recomantaions);
+  // console.log(recomantaions);
   useEffect(() => {
     fetchAllJobs();
   }, []);
 
   const fetchAllJobs = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/recomantaions/${id}`
-    );
+    const { data } = await axiosSecure.get(`/recomantaions/${id}`);
     setRecomantaions(data);
   };
 
@@ -110,7 +114,11 @@ export default function QueryDetails() {
                 <div className="flex items-center gap-4">
                   <div className="avatar">
                     <div className="w-20 rounded-full ring ring-indigo-400 ring-offset-2">
-                      <img referrerPolicy="no-referrer"  src={product?.buyer?.photo} alt="User" />
+                      <img
+                        referrerPolicy="no-referrer"
+                        src={product?.buyer?.photo}
+                        alt="User"
+                      />
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -156,59 +164,69 @@ export default function QueryDetails() {
               </div>
               {/* Recomandations Sections */}
               <div className="container mx-auto p-4">
-      <div className="space-y-4">
-        {recomantaions.map((rec) => (
-          <div key={rec._id} className="bg-white rounded-lg shadow p-4">
-            <div className="flex gap-3">
-              {/* User Avatar */}
-              <div className="flex-shrink-0">
-                <div className="w-10 h-10 rounded-full bg-gray-100 overflow-hidden">
-                  {rec.Recommender?.photo ? (
-                    <img
-                      src={rec.Recommender?.photo}
-                      alt=""
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.parentNode.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-500"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>';
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                      <User className="w-6 h-6 text-gray-500" />
-                    </div>
-                  )}
-                </div>
-              </div>
+                <div className="space-y-4">
+                  {recomantaions.map((rec) => (
+                    <div
+                      key={rec._id}
+                      className="bg-white rounded-lg shadow p-4"
+                    >
+                      <div className="flex gap-3">
+                        {/* User Avatar */}
+                        <div className="flex-shrink-0">
+                          <div className="w-10 h-10 rounded-full bg-gray-100 overflow-hidden">
+                            {rec.Recommender?.photo ? (
+                              <img
+                                src={rec.Recommender?.photo}
+                                alt=""
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.parentNode.innerHTML =
+                                    '<div class="w-full h-full flex items-center justify-center bg-gray-200"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-500"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>';
+                                }}
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                                <User className="w-6 h-6 text-gray-500" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
 
-              {/* Content */}
-              <div className="flex-grow">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="font-medium text-gray-900">{rec.Recommender?.name}</h3>
-                    <time className="text-sm text-gray-500">
-                    {new Date(rec.currentDate).toLocaleDateString()}
-                  </time>
-                  </div>
-                  
-                  {/* Action Buttons */}
-                  <div className="flex gap-2">
-                    <button className="p-1 hover:bg-gray-100 rounded-full transition-colors">
-                      <Edit className="w-4 h-4 text-gray-500" />
-                    </button>
-                    <button className="p-1 hover:bg-gray-100 rounded-full transition-colors">
-                      <Trash2 className="w-4 h-4 text-gray-500" />
-                    </button>
-                  </div>
+                        {/* Content */}
+                        <div className="flex-grow">
+                          <div className="flex items-start justify-between">
+                            <div>
+                              <h3 className="font-medium text-gray-900">
+                                {rec.Recommender?.name}
+                              </h3>
+                              <time className="text-sm text-gray-500">
+                                {new Date(rec.currentDate).toLocaleDateString()}
+                              </time>
+                            </div>
+
+                            {/* Action Buttons */}
+                            <div className="flex gap-2">
+                              <button className="p-1 hover:bg-gray-100 rounded-full transition-colors">
+                                <Edit className="w-4 h-4 text-gray-500" />
+                              </button>
+                              <button className="p-1 hover:bg-gray-100 rounded-full transition-colors">
+                                <Trash2 className="w-4 h-4 text-gray-500" />
+                              </button>
+                            </div>
+                          </div>
+                          <h4 className="text-sm font-bold text-gray-500">
+                            {rec.recomandationTitle}
+                          </h4>
+                          <p className="mt-1 text-gray-600">
+                            {rec.recomandateText}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <h4 className="text-sm font-bold text-gray-500">{rec.recomandationTitle}</h4>
-                <p className="mt-1 text-gray-600">{rec.recomandateText}</p>
               </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
             </div>
           </div>
         </motion.div>

@@ -30,7 +30,7 @@ const axiosSecure = useAxiosSecure()
       const handleDelete = async(id) => {
         console.log(id, "deleted id");
         try {
-           await axios.delete(`${import.meta.env.VITE_API_URL}/product/${id}`)
+           await axiosSecure.delete(`/product/${id}`)
           toast.success('Data delete successfully!!!');
           fetchAllJobs()
         } catch (err) {

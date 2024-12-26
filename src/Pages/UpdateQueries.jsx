@@ -1,24 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios'
 import toast from 'react-hot-toast';
 import AuthContext from '../Provider/AuthContext';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 export default function UpdateQueries() {
+  const axiosSecure = useAxiosSecure()
     const [startDate, setStartDate] = useState(new Date())
     const navigate = useNavigate()
     const {id} = useParams()
     const {user} = useContext(AuthContext);
-    console.log(id)
+    // console.log(id)
     const [product, setProduct] = useState({});
-    console.log(product)
+    // console.log(product)
 
     useEffect(()=>{
-        updateSingleJob();
+        updateSingleProduct();
       },[id])
        
-      const updateSingleJob = async()=>{
-        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/product/${id}`)
+      const updateSingleProduct = async()=>{
+        const {data} = await axiosSecure.get(`/product/${id}`)
         setProduct(data)
         setStartDate(new Date(data.deadline))
       };
@@ -50,7 +51,7 @@ export default function UpdateQueries() {
         }
 
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL}/product-data/${id}`, addFormData)
+            await axiosSecure.put(`/product-data/${id}`, addFormData)
             form.reset()
             toast.success('Data Added Successfully!!!');
             navigate("/my-queries")

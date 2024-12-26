@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+
 import { Trash2, User } from "lucide-react";
 import AuthContext from "../Provider/AuthContext";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 export default function RecomdationForME() {
+  const axiosSecure = useAxiosSecure()
   const { user } = useContext(AuthContext);
   const [myRecomandation, setMyRecomandation] = useState([]);
   console.log(myRecomandation);
@@ -11,8 +13,8 @@ export default function RecomdationForME() {
   }, []);
 
   const fetchAllJobs = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/me-recomandations/${user?.email}`
+    const { data } = await axiosSecure.get(
+      `/me-recomandations/${user?.email}`
     );
     setMyRecomandation(data);
   };

@@ -1,9 +1,11 @@
 import { Trash2, User } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import AuthContext from "../Provider/AuthContext";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 export default function MyRecomandation() {
+
+  const axiosSecure = useAxiosSecure()
   const {user} = useContext(AuthContext)
   const [recomandations, setRecomandations] = useState([]);
   console.log(recomandations);
@@ -12,8 +14,8 @@ export default function MyRecomandation() {
   }, []);
 
   const fetchAllJobs = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/my-recomandations/${user?.email}`
+    const { data } = await axiosSecure.get(
+      `/my-recomandations/${user?.email}`
     );
     setRecomandations(data);
   };

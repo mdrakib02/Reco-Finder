@@ -28,7 +28,8 @@ export default function Login() {
       };
 
       // Google Login
-      const handleGoogleSignIn = async () => {
+      const handleGoogleSignIn = async (e) => {
+        e.preventDefault()
         try {
             await signInWithGoogle();
             navigate(form, { replace: true });
