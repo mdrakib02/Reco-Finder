@@ -6,6 +6,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login() {
   const { signIn, signInWithGoogle } = useContext(AuthContext)
@@ -29,15 +30,15 @@ export default function Login() {
       // Google Login
       const handleGoogleSignIn = async () => {
         try {
-          await signInWithGoogle()
-          navigate(form, { replace: true })
-          toast.success('Signin Successful')
-          
+            await signInWithGoogle();
+            navigate(form, { replace: true });
+            toast.success('Signin Successful');
         } catch (err) {
-          console.log(err)
-          toast.error(err?.message)
+            console.log(err);
+            toast.error(err?.message);
         }
-      }
+    };
+    
 
       // SignIn 
       const handleSignIn = async e => {

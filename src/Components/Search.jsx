@@ -2,13 +2,7 @@ import React, { useState } from "react";
 
 export default function Search() {
 
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const handleSearch = (e) => {
-      e.preventDefault();
-      // Handle search logic here
-      console.log('Searching for:', searchTerm);
-    };
+    
   return (
     <div className="w-full max-w-4xl mx-auto p-4">
         <div className="my-6 md:my-8 lg:my-12">
