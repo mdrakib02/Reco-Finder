@@ -29,8 +29,8 @@ export default function MyRecomandation() {
             <button
               onClick={async () => {
                 try {
-                  await axios.delete(
-                    `${import.meta.env.VITE_API_URL}/recomandation/${id}`
+                  await axiosSecure.delete(
+                    `/recomandation/${id}`
                   );
                   toast.success("Recommendation deleted successfully!");
                   fetchAllJobs();
