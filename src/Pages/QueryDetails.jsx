@@ -12,13 +12,14 @@ import {
 } from "lucide-react";
 import { h1 } from "framer-motion/client";
 import toast from "react-hot-toast";
-import AuthContext from "../Provider/AuthContext";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import AuthContext from "../Provider/AuthContext";
 
 export default function QueryDetails() {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { user } = useContext(AuthContext);
+  console.log(user)
   const [product, setProduct] = useState({});
   const [startDate, setStartDate] = useState(new Date());
   const [recomantaions, setRecomantaions] = useState([]);
@@ -26,8 +27,8 @@ export default function QueryDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/product/${id}`
+        const { data } = await axiosSecure.get(
+          `/product/${id}`
         );
         setProduct(data);
       } catch (error) {
