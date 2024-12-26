@@ -76,13 +76,14 @@ const axiosSecure = useAxiosSecure()
               transition={{ delay: index * 0.1 }}
               className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6"
             >
-              <img 
+              <div className='w-32 md:w-36 lg:w-44'><img 
                 src={query.img} 
                 alt={query.productName}
-                className="w-full h-48 object-cover rounded-lg mb-4"
-              />
+                className="w-full  object-cover rounded-lg mb-4"
+              /></div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">{query.title}</h3>
-              <p className="text-gray-600 mb-2">{query.brand}</p>
+              <p className="text-gray-600 mb-2">Brand:{query.brand}</p>
+              <p className="text-gray-600 mb-2">{new Date(query.deadline).toLocaleDateString()}</p>
               <p className="text-sm text-gray-500 mb-4">{query.detail}</p>
               
               <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
