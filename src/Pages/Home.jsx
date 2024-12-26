@@ -2,6 +2,7 @@ import React from 'react'
 import Slider from '../Components/HomeComponets/Slider'
 import FindFavoriteProducts from '../Components/FindFavoriteProducts'
 import Search from '../Components/Search'
+import TrendingProducts from '../Components/TrendingProducts'
 
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-center">Find Your Favourite Products</h1>
         </div>
       <FindFavoriteProducts />
+      <TrendingProducts></TrendingProducts>
       </div>
     </div>
   )
