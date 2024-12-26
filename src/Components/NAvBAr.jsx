@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Menu, X, LogIn, LogOut, User, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AuthContext } from "../Provider/AuthProvider";
 import toast from "react-hot-toast";
+import AuthContext from "../Provider/AuthContext";
 
 const StyledNavLink = ({ to, children, onClick, className }) => (
   <NavLink

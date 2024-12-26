@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import { User, Mail, Lock, Link, ArrowRight } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { AuthContext } from '../../Provider/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../Provider/AuthContext';
 
 export default function Register() {
   const navigate = useNavigate()

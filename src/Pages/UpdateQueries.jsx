@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../Provider/AuthProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios'
 import toast from 'react-hot-toast';
+import AuthContext from '../Provider/AuthContext';
 
 export default function UpdateQueries() {
     const [startDate, setStartDate] = useState(new Date())

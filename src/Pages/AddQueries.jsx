@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import AuthContext from "../Provider/AuthContext";
 
 export default function AddQueries() {
   const { user } = useContext(AuthContext);

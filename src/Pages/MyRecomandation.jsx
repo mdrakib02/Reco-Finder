@@ -2,7 +2,7 @@ import { Trash2, User } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { AuthContext } from "../Provider/AuthProvider";
+import AuthContext from "../Provider/AuthContext";
 export default function MyRecomandation() {
   const {user} = useContext(AuthContext)
   const [recomandations, setRecomandations] = useState([]);

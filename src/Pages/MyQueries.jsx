@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Eye, Edit2, Trash2, AlertCircle } from 'lucide-react';
-import { AuthContext } from '../Provider/AuthProvider';
+
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
+import AuthContext from '../Provider/AuthContext';
+
 
 export default function MyQueries() {
-
+const axiosSecure = useAxiosSecure()
 
       const { user } = useContext(AuthContext);
       const [products, setProducts] = useState([]);
@@ -17,8 +20,8 @@ export default function MyQueries() {
       }, [user]);
     
       const fetchAllJobs = async () => {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/my-products/${user?.email}`
+        const { data } = await axiosSecure.get(
+          `/my-products/${user?.email}`
         );
         setProducts(data);
         console.log(data)

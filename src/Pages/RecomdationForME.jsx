@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { AuthContext } from "../Provider/AuthProvider";
 import { Trash2, User } from "lucide-react";
+import AuthContext from "../Provider/AuthContext";
 export default function RecomdationForME() {
   const { user } = useContext(AuthContext);
   const [myRecomandation, setMyRecomandation] = useState([]);

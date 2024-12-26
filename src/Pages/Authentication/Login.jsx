@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import { Mail, Lock, ArrowRight,  } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
-import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import AuthContext from '../../Provider/AuthContext';
 
 export default function Login() {
   const { signIn, signInWithGoogle } = useContext(AuthContext)

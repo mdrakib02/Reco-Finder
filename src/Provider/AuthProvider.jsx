@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -11,9 +11,9 @@ import {
 } from "firebase/auth";
 import { Auth } from "../Firebase/Firebase.config";
 import axios from "axios";
+import AuthContext from "./AuthContext";
 
 const googleProvider = new GoogleAuthProvider();
-export const AuthContext = createContext(null);
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);

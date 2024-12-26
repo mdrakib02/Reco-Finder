@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { Upload, User, Package, Mail, Building, Edit, Trash2 } from "lucide-react";
 import { h1 } from "framer-motion/client";
 import toast from "react-hot-toast";
+import AuthContext from "../Provider/AuthContext";
 
 export default function QueryDetails() {
   const { id } = useParams();
