@@ -8,7 +8,7 @@ export default function MyRecomandation() {
   const axiosSecure = useAxiosSecure()
   const {user} = useContext(AuthContext)
   const [recomandations, setRecomandations] = useState([]);
-  console.log(recomandations);
+  // console.log(recomandations);
   useEffect(() => {
     fetchAllJobs();
   }, []);
@@ -35,7 +35,7 @@ export default function MyRecomandation() {
                   toast.success("Recommendation deleted successfully!");
                   fetchAllJobs();
                 } catch (err) {
-                  console.log(err.message);
+                  // console.log(err.message);
                   toast.error(err.message);
                 }
                 toast.dismiss(t.id);

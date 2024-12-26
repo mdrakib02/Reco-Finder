@@ -36,7 +36,7 @@ export default function Login() {
             toast.success('Signin Successful');
             
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             toast.error(err?.message);
         }
     };
@@ -48,7 +48,7 @@ export default function Login() {
         const form = e.target
         const email = form.email.value
         const pass = form.password.value
-        console.log({ email, pass })
+        // console.log({ email, pass })
         try {
           //User Login
           await signIn(email, pass)
@@ -57,7 +57,7 @@ export default function Login() {
            form.reset("")
            navigate("/")
         } catch (err) {
-          console.log(err)
+          // console.log(err)
           toast.error(err?.message)
         }
       }

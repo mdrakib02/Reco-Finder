@@ -56,7 +56,7 @@ export default function AuthProvider({ children }) {
           { email: currentUser?.email },
           {withCredentials:true}
         )
-        console.log(data);
+        // console.log(data);
       }else{
         setUser(currentUser);
         const { data } = await axios.get(
@@ -65,7 +65,7 @@ export default function AuthProvider({ children }) {
         )
       }
       setLoading(false);
-      console.log("CurrentUser-->", currentUser);
+      // console.log("CurrentUser-->", currentUser);
     });
     return () => {
       return unsubscribe();

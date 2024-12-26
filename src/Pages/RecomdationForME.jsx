@@ -7,7 +7,7 @@ export default function RecomdationForME() {
   const axiosSecure = useAxiosSecure()
   const { user } = useContext(AuthContext);
   const [myRecomandation, setMyRecomandation] = useState([]);
-  console.log(myRecomandation);
+  // console.log(myRecomandation);
   useEffect(() => {
     fetchAllJobs();
   }, []);

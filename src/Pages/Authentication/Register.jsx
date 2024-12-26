@@ -46,19 +46,19 @@ export default function Register() {
           toast.error("Must have an Lowercase letter in the password!");
           return;
         }
-        console.log({ email, password, name, photo })
+        // console.log({ email, password, name, photo })
         try {
           
           //2. User Registration
           const result = await createUser(email, password)
-          console.log(result)
+          // console.log(result)
           await updateUserProfile(name, photo)
           setUser({ ...result.user, photoURL: photo, displayName: name })
           toast.success('Signup Successful')
           navigate('/')
           form.reset("")
         } catch (err) {
-          console.log(err)
+          // console.log(err)
           toast.error(err?.message)
         }
       }

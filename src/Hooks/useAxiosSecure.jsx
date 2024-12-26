@@ -13,7 +13,7 @@ const useAxiosSecure = () => {
   const { logOut } = useContext(AuthContext);
 // const {logout} = useAuth()
   const navigate = useNavigate();
-console.log(logOut)
+// console.log(logOut)
   useEffect(() => {
     const interceptor = axiosSecure.interceptors.response.use(
       (res) => {
@@ -24,7 +24,7 @@ console.log(logOut)
         if (error.response?.status === 401 || error.response?.status === 403) {
             logOut();
           navigate("/login");
-          console.log("Error handaling")
+          // console.log("Error handaling")
         }
         return Promise.reject(error);
       }

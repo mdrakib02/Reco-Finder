@@ -14,7 +14,7 @@ const axiosSecure = useAxiosSecure()
 
       const { user } = useContext(AuthContext);
       const [products, setProducts] = useState([]);
-      console.log(products);
+      // console.log(products);
       useEffect(() => {
         fetchAllJobs();
       }, [user]);
@@ -24,17 +24,17 @@ const axiosSecure = useAxiosSecure()
           `/my-products/${user?.email}`
         );
         setProducts(data);
-        console.log(data)
+        // console.log(data)
       };
 
       const handleDelete = async(id) => {
-        console.log(id, "deleted id");
+        // console.log(id, "deleted id");
         try {
            await axiosSecure.delete(`/product/${id}`)
           toast.success('Data delete successfully!!!');
           fetchAllJobs()
         } catch (err) {
-          console.log(err.message);
+          // console.log(err.message);
           toast.error(err.message)
         }
       };

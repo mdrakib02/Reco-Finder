@@ -19,7 +19,7 @@ export default function QueryDetails() {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { user } = useContext(AuthContext);
-  console.log(user)
+  // console.log(user)
   const [product, setProduct] = useState({});
   const [startDate, setStartDate] = useState(new Date());
   const [recomantaions, setRecomantaions] = useState([]);
@@ -32,7 +32,7 @@ export default function QueryDetails() {
         );
         setProduct(data);
       } catch (error) {
-        console.error("Error fetching product:", error);
+        // console.error("Error fetching product:", error);
       }
     };
     fetchData();
@@ -46,12 +46,12 @@ export default function QueryDetails() {
     const RecomandationProductName = form.RecomandationProductName.value;
     const RecomandationImgUrl = form.RecomandationImgUrl.value;
     const recomandateText = form.recomandateText.value;
-    console.log(
-      recomandationTitle,
-      RecomandationProductName,
-      RecomandationImgUrl,
-      recomandateText
-    );
+    // console.log(
+    //   recomandationTitle,
+    //   RecomandationProductName,
+    //   RecomandationImgUrl,
+    //   recomandateText
+    // );
 
     const recomandationData = {
       recomandationTitle,

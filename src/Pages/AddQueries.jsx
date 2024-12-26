@@ -8,10 +8,10 @@ export default function AddQueries() {
   const { user } = useContext(AuthContext);
   const [startDate, setStartDate] = useState(new Date());
   const navigate = useNavigate();
-  console.log(user);
+  // console.log(user);
   const addQueries = async(e) => {
     e.preventDefault();
-    console.log("hi");
+    // console.log("hi");
     const form = e.target;
     const name = form.name.value;
     const brand = form.brand.value;
@@ -19,7 +19,7 @@ export default function AddQueries() {
     const title = form.title.value;
     const category = form.category.value;
     const boycokDetail = form.boycokDetail.value;
-    console.log(name, brand, img, title, boycokDetail);
+    // console.log(name, brand, img, title, boycokDetail);
 
     const addFormData = {
       name,
@@ -39,19 +39,19 @@ export default function AddQueries() {
     
     try {
       const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/add-product`, addFormData)
-      console.log(data)
+      // console.log(data)
       toast.success('Data Added Successfully!!!');
       form.reset()
       navigate("/my-queries")
 
     } catch (err) {
-      console.log(err.message)
+      // console.log(err.message)
       toast.error(err.message)
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg my-6 md:my-8 lg:my-12">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Add New Query</h2>
       <form onSubmit={addQueries} className="space-y-6">
         {/* product NAme */}

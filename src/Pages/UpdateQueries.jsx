@@ -26,14 +26,14 @@ export default function UpdateQueries() {
 
     const addQueries = async(e) => {
         e.preventDefault();
-        console.log("hi");
+        // console.log("hi");
         const form = e.target;
         const name = form.name.value;
         const brand = form.brand.value;
         const img = form.img.value;
         const title = form.title.value;
         const detail = form.detail.value;
-        console.log(name, brand, img, title, detail);
+        // console.log(name, brand, img, title, detail);
     
         const addFormData = {
             name,
@@ -57,7 +57,7 @@ export default function UpdateQueries() {
             navigate("/my-queries")
       
           } catch (err) {
-            console.log(err.message)
+            // console.log(err.message)
             toast.error(err.message)
           }
     }
