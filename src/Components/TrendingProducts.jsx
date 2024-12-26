@@ -2,15 +2,20 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const products = [
-  { id: 1, name: 'Smart Watch Pro', price: '$299', image: '/api/placeholder/300/200' },
-  { id: 2, name: 'Wireless Earbuds', price: '$159', image: '/api/placeholder/300/200' },
-  { id: 3, name: 'Ultra HD Camera', price: '$899', image: '/api/placeholder/300/200' },
-  { id: 4, name: 'Gaming Console', price: '$499', image: '/api/placeholder/300/200' },
-  { id: 5, name: 'Laptop Elite', price: '$1299', image: '/api/placeholder/300/200' },
-  { id: 6, name: 'Smartphone X', price: '$799', image: '/api/placeholder/300/200' },
-  { id: 7, name: 'Tablet Pro', price: '$649', image: '/api/placeholder/300/200' },
-  { id: 8, name: 'Smart Speaker', price: '$199', image: '/api/placeholder/300/200' },
+  { id: 1, name: 'Smart Watch Pro', price: '$299', image: 'https://i.ibb.co.com/p2BCSw3/pngwing-com-5.png' },
+  { id: 2, name: 'Wireless Earbuds', price: '$159', image: 'https://i.ibb.co.com/j6Nfvcb/pngwing-com-4.png' },
+  { id: 3, name: 'Ultra HD Camera', price: '$899', image: 'https://i.ibb.co.com/j6Nfvcb/pngwing-com-4.png' },
+  { id: 4, name: 'Gaming Console', price: '$499', image: 'https://i.ibb.co.com/j6Nfvcb/pngwing-com-4.png' },
+  { id: 5, name: 'Laptop Elite', price: '$1299', image: 'https://i.ibb.co.com/j6Nfvcb/pngwing-com-4.png' },
+  { id: 6, name: 'Smartphone X', price: '$799', image: 'https://i.ibb.co.com/Rv82nmP/pngwing-com-1.png' },
+  { id: 7, name: 'Tablet Pro', price: '$649', image: 'https://i.ibb.co.com/Rv82nmP/pngwing-com-1.png' },
+  { id: 8, name: 'Smart Speaker', price: '$199', image: 'https://i.ibb.co.com/yqtv3nW/pngwing-com.png' },
 ];
+
+
+
+
+
 
 const colors = ['#4F46E5', '#7C3AED', '#2563EB', '#4338CA'];
 
