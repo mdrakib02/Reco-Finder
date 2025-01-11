@@ -10,8 +10,8 @@ const StyledNavLink = ({ to, children, onClick, className }) => (
     to={to}
     onClick={onClick}
     className={({ isActive }) => `
-      text-gray-600 hover:text-indigo-600 transition-all duration-200
-      ${isActive ? "text-indigo-600 font-semibold text-xl" : ""}
+      text-white  transition-all duration-200
+      ${isActive ? " font-semibold text-xl" : ""}
       ${className || ""}
     `}
   >
@@ -75,12 +75,12 @@ const UserMenu = ({ user, handleLogOut, isOpen, setIsOpen }) => {
           >
             <div className="px-4 py-2 border-b">
               <p className="text-sm font-medium text-gray-900">{user.displayName}</p>
-              <p className="text-sm text-gray-500 truncate">{user.email}</p>
+              <p className="text-sm text-white truncate">{user.email}</p>
             </div>
             
             <NavLink 
               to="/profile" 
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+              className="block px-4 py-2 text-sm text-white hover:bg-gray-50"
               onClick={() => setIsOpen(false)}
             >
               Profile Settings
@@ -127,7 +127,7 @@ export default function NavBar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="sticky top-0 z-50 bg-violet-200 shadow-lg"
+      className="sticky top-0 z-50 bg-indigo-500 shadow-lg"
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
@@ -137,10 +137,10 @@ export default function NavBar() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className="h-8 w-8 bg-indigo-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-xl">R</span>
+              <div className="h-8 w-8 bg-white rounded-full flex items-center justify-center">
+                <span className="text-indigo-500 font-bold text-xl">R</span>
               </div>
-              <span className="text-xl font-bold text-gray-800">
+              <span className="text-xl font-bold text-white">
                 RECO FIND
               </span>
             </motion.div>
